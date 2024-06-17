@@ -8,7 +8,9 @@ const router = express.Router();
 router.post('/save-customer', CustomerController.saveCustomer);
 router.get('/find-customer', verifyToken, CustomerController.findCustomer);
 router.put('/update-customer', verifyToken, CustomerController.updateCustomer);
-router.delete('/delete-customer', verifyToken, CustomerController.deleteCustomer);
+// router.delete('/delete-customer', verifyToken, CustomerController.deleteCustomer);
+// router.delete('/delete-customer', CustomerController.deleteCustomer);
+router.delete('/delete-by-id/:id', CustomerController.deleteCustomer);
 // router.get('/find-all-customer', verifyToken, CustomerController.findAllCustomers);
 router.get('/find-all-customer', CustomerController.findAllCustomers);
 

@@ -9,7 +9,7 @@ DELETE -> remove
 
 const saveCustomer = (req, resp) => {
     const tempCustomer = new Customer({
-        // nic: req.body.nic,
+        //  
         name: req.body.name,
         address: req.body.address,
         salary: req.body.salary
@@ -58,18 +58,13 @@ const updateCustomer = (req, resp) => {
         });
 };
 
-const deleteCustomer = (req, resp) => {
-    Customer.deleteOne({ nic: req.headers.nic })
-        .then(result => {
-            if (result.deletedCount > 0) {
-                resp.status(204).json({ status: true, message: 'Customer deleted successfully' });
-            } else {
-                resp.status(400).json({ status: false, message: 'Try again' });
-            }
-        })
-        .catch(error => {
-            resp.status(500).json(error);
-        });
+const deleteCustomer=async (req,resp)=>{
+    const deleteData = await Customer.findByIdAndDelete({'_id':req.params.id});
+    if(deleteData){
+        return  resp.status(204).json({'message':'deleted'});
+    }else{
+        return resp.status(500).json({'message':'internal server error'});
+    }
 };
 
 const findAllCustomers = (req, resp) => {
@@ -82,10 +77,33 @@ const findAllCustomers = (req, resp) => {
         });
 };
 
+
+// const findAll = async (req, resp) => {
+//     try {
+//         const { searchText, page = 1, size = 10 } = req.query;
+
+//         const pageNumber = parseInt(page);
+//         const pageSize = parseInt(size);
+
+//         const query = {};
+//         if (searchText) {
+//             query.$text = { $search: searchText };
+//         }
+
+//         const skip = (pageNumber - 1) * pageSize;
+//         const response = await Customer.find(query).limit(pageSize).skip(skip);
+//         return resp.status(200).json(response);
+//     } catch (error) {
+//         console.log(error);
+//         return resp.status(500).json({ 'message': 'Internal server error' });
+//     }
+// };
+
 module.exports = {
     saveCustomer,
     findCustomer,
     updateCustomer,
     deleteCustomer,
     findAllCustomers
+    // findAll,
 };
