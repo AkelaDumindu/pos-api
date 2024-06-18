@@ -25,8 +25,7 @@ const saveCustomer = (req, resp) => {
 };
 
 const findCustomer = (req, resp) => {
-    Customer.findOne({ nic: req.headers.nic })
-        .then(result => {
+    Customer.findOne({'_id':req.params.id}).then(result=>{
             if (result == null) {
                 resp.status(404).json({ status: false, message: 'Customer not found' });
             } else {

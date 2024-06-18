@@ -6,7 +6,8 @@ const router = express.Router();
 
 // router.post('/save-customer', verifyToken, CustomerController.saveCustomer);
 router.post('/save-customer', CustomerController.saveCustomer);
-router.get('/find-customer', verifyToken, CustomerController.findCustomer);
+// router.get('/find-customer', verifyToken, CustomerController.findCustomer);
+router.get('/find-customer/:id', CustomerController.findCustomer);
 router.put('/update-customer', verifyToken, CustomerController.updateCustomer);
 // router.delete('/delete-customer', verifyToken, CustomerController.deleteCustomer);
 // router.delete('/delete-customer', CustomerController.deleteCustomer);
