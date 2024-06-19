@@ -37,25 +37,41 @@ const findCustomer = (req, resp) => {
         });
 };
 
-const updateCustomer = (req, resp) => {
-    Customer.updateOne({ nic: req.headers.nic }, {
-        $set: {
-            name: req.body.name,
-            address: req.body.address,
-            salary: req.body.salary
+// const updateCustomer = (req, resp) => {
+//     Customer.updateOne({ nic: req.headers.nic }, {
+//         $set: {
+//             name: req.body.name,
+//             address: req.body.address,
+//             salary: req.body.salary
+//         }
+//     })
+//         .then(result => {
+//             if (result.modifiedCount > 0) {
+//                 resp.status(201).json({ status: true, message: 'Customer updated successfully' });
+//             } else {
+//                 resp.status(200).json({ status: false, message: 'Try again' });
+//             }
+//         })
+//         .catch(error => {
+//             resp.status(500).json(error);
+//         });
+// };
+
+const updateCustomer= async (req,resp)=>{
+    const updateData = await Customer.findOneAndUpdate({'_id':req.params.id},{
+        $set:{
+            name:req.body.name,
+            address:req.body.address,
+            salary:req.body.salary
         }
-    })
-        .then(result => {
-            if (result.modifiedCount > 0) {
-                resp.status(201).json({ status: true, message: 'Customer updated successfully' });
-            } else {
-                resp.status(200).json({ status: false, message: 'Try again' });
-            }
-        })
-        .catch(error => {
-            resp.status(500).json(error);
-        });
-};
+    },{new:true});
+
+    if(updateData){
+        return  resp.status(200).json({'message':'updated'});
+    }else{
+        return resp.status(500).json({'message':'internal server error'});
+    }
+}
 
 const deleteCustomer=async (req,resp)=>{
     const deleteData = await Customer.findByIdAndDelete({'_id':req.params.id});
