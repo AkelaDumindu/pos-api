@@ -6,6 +6,7 @@ require('dotenv').config();
 
 const customerRoute = require('./route/customerRoute');
 const userRoute = require('./route/userRoute');
+const productRoute = require('./route/productRoute');
 
 const app = express();
 app.use(cors())
@@ -38,5 +39,6 @@ app.get('/', (req, resp) => {
 // Customer route
 app.use('/api/v1/customers', customerRoute);
 app.use('/api/v1/users', userRoute);
+app.use('/api/v1/products', productRoute);
 
 module.exports = app;

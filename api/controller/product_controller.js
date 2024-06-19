@@ -1,4 +1,4 @@
-const Product= require('../model/ProductSchema');
+const Product= require('../model/productSchema');
 
 
 const createProduct=(req,resp)=>{
@@ -49,38 +49,49 @@ const deleteProduct=async (req,resp)=>{
         return resp.status(500).json({'message':'internal server error'});
     }
 }
-const findAllProduct = async (req, resp) => {
-        try {
-            const { searchText, page = 1, size = 10 } = req.query;
+// const findAllProduct = async (req, resp) => {
+//         try {
+//             const { searchText, page = 1, size = 10 } = req.query;
     
-            const pageNumber = parseInt(page);
-            const pageSize = parseInt(size);
+//             const pageNumber = parseInt(page);
+//             const pageSize = parseInt(size);
     
-            const query = {};
-            if (searchText) {
-                query.$text = { $search: searchText };
-            }
+//             const query = {};
+//             if (searchText) {
+//                 query.$text = { $search: searchText };
+//             }
     
-            const skip = (pageNumber - 1) * pageSize;
-            const response = await Customer.find(query).limit(pageSize).skip(skip);
-            return resp.status(200).json(response);
-        } catch (error) {
-            console.log(error);
-            return resp.status(500).json({ 'message': 'Internal server error' });
-        }
-    };
+//             const skip = (pageNumber - 1) * pageSize;
+//             const response = await Customer.find(query).limit(pageSize).skip(skip);
+//             return resp.status(200).json(response);
+//         } catch (error) {
+//             console.log(error);
+//             return resp.status(500).json({ 'message': 'Internal server error' });
+//         }
+//     };
+
+const findAllProduct = (req, resp) => {
+    Product.find({})
+        .then(result => {
+            resp.status(200).json({ status: true, data: result });
+        })
+        .catch(error => {
+            resp.status(500).json(error);
+        });
+};
 
 
-const findAllMin=(req,resp)=>{
-    try{
-        ProductSchema.find({qtyOnHand:{$lt:10}}).then(data=>{
+
+const findAllMin = (req, resp) => {
+    Product.find({ qtyOnHand: { $lt: 10 } })
+        .then(data => {
             return resp.status(200).json(data);
         })
+        .catch(error => {
+            return resp.status(500).json({ 'message': 'internal server error' });
+        });
+};
 
-    }catch (error){
-        return resp.status(500).json({'message':'internal server error'});
-    }
-}
 const findCount=(req,resp)=>{
     try{
         ProductSchema.countDocuments().then(data=>{
