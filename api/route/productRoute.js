@@ -20,6 +20,6 @@ router.get('/find-all-product', ProductController.findAllProduct);
 // router.get('/find-all-min',verifyUser, ProductController.findAllMin);
 // router.get('/find-all-count',verifyUser, ProductController.findCount);
 router.get('/find-all-min', ProductController.findAllMin);
-router.get('/find-all-count', ProductController.findCount);
+router.get('/find-all-count', ProductController.findAllCount);
 
 module.exports = router;

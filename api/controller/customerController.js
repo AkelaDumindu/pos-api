@@ -114,11 +114,23 @@ const findAllCustomers = (req, resp) => {
 //     }
 // };
 
+const findAllCount=(req,resp)=>{
+    try{
+        Customer.countDocuments().then(data=>{
+            return resp.status(200).json(data);
+        })
+
+    }catch (error){
+        return resp.status(500).json({'message':'internal server error'});
+    }
+}
+
 module.exports = {
     saveCustomer,
     findCustomer,
     updateCustomer,
     deleteCustomer,
-    findAllCustomers
+    findAllCustomers,
+    findAllCount
     // findAll,
 };

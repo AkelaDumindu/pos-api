@@ -15,5 +15,6 @@ router.put('/update-customer/:id', CustomerController.updateCustomer);
 router.delete('/delete-by-id/:id', CustomerController.deleteCustomer);
 // router.get('/find-all-customer', verifyToken, CustomerController.findAllCustomers);
 router.get('/find-all-customer', CustomerController.findAllCustomers);
+router.get('/find-all-count', CustomerController.findAllCount);
 
 module.exports = router;

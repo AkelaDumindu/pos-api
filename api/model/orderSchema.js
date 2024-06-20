@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const ProductSchema = new mongoose.Schema({
+const OrderSchema = new mongoose.Schema({
     date:{
         type:Date,
         required:true
@@ -20,4 +20,4 @@ const ProductSchema = new mongoose.Schema({
     
 });
 
-module.exports = mongoose.model('product', ProductSchema);
+module.exports = mongoose.model('order', OrderSchema);

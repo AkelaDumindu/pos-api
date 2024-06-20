@@ -92,9 +92,9 @@ const findAllMin = (req, resp) => {
         });
 };
 
-const findCount=(req,resp)=>{
+const findAllCount=(req,resp)=>{
     try{
-        ProductSchema.countDocuments().then(data=>{
+        Product.countDocuments().then(data=>{
             return resp.status(200).json(data);
         })
 
@@ -109,7 +109,7 @@ module.exports = {
     updateProduct,
     deleteProduct,
     findAllProduct,
-    findCount,
+    findAllCount,
     findAllMin
     // findAll,
 };
