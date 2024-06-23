@@ -5,7 +5,7 @@ const verifyToken = require('../middleware/authMiddleware');
 const router = express.Router();
 
 // router.post('/save-customer', verifyToken, ProductController.createProduct);
-router.post('/save-product', OrderController.createOrder);
+router.post('/save-order', OrderController.createOrder);
 // router.get('/find-customer', verifyToken, ProductController.findProduct);
 router.get('/find-product/:id', OrderController.findOrder);
 // router.put('/update-customer', verifyToken, ProductController.updateProduct);
