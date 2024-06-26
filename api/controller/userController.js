@@ -129,7 +129,7 @@ const login = (req,resp) => {
                    const secretKey=process.env.SECRET_KEY;
                    const expiresIn='24h';
 
-                   const token = jsonwebtoken.sign(payload,secretKey,{expiresIn});
+                   const token = jsonWebToken.sign(payload,secretKey,{expiresIn});
                    return resp.status(200).json(token);
                }else{
                    return resp.status(401).json({'message':'Password is incorrect!'});
